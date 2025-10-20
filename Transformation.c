@@ -2,9 +2,10 @@
 #include <math.h>
 void scale(float *ta_ptr, float sf_x,float sf_y, float sf_z);
 
-
+// Temp main for test
 int main(){
 
+// Identity Matrix as base
 float  transform_array[4][4] =
 {
                                 {1.0,0.0,0.0,0.0},
@@ -13,10 +14,13 @@ float  transform_array[4][4] =
                                 {0.0,0.0,0.0,1.0}
 
 };
+
+// Points to the first element
 float *ta_ptr = &transform_array[0][0];
 
 scale(ta_ptr, 5.0, 3.0, 4.0);
 
+// Value check for transform array
 for(int i = 0; i < 4; i++){
     for (int j = 0; j < 4; j++){
         printf(" %f\t",transform_array[i][j]);
@@ -28,25 +32,30 @@ return 0;
 }
 
 
-// Scale: general function for indenpendent axis scaling of a 3D homogeneous coordinate system.
+// scale: general function for indenpendent axis scaling in homogeneous 3D coordinate system.
 void scale(float *ta_ptr, float sf_x,float sf_y, float sf_z){
     // Row 1
     *ta_ptr = sf_x * *(ta_ptr);
     *(ta_ptr+1) = sf_y * *(ta_ptr+1);
     *(ta_ptr+2) = sf_z * *(ta_ptr+2);
+
     // Row 2
     *(ta_ptr+4) = sf_x * *(ta_ptr+4);
     *(ta_ptr+5) = sf_y * *(ta_ptr+5);
     *(ta_ptr+6) = sf_z * *(ta_ptr+6);
+
     // Row 3
     *(ta_ptr+8) = sf_x * *(ta_ptr+8);
     *(ta_ptr+9) = sf_y * *(ta_ptr+9);
     *(ta_ptr+10) = sf_z * *(ta_ptr+10);
+
     // Row 4
     *(ta_ptr+12) = sf_x * *(ta_ptr+12);
     *(ta_ptr+13) = sf_y * *(ta_ptr+13);
     *(ta_ptr+14) = sf_z * *(ta_ptr+14);
 }
+
+// **FIX: Rotate functions contain a flaw where previously-modified arrays element are called, thus, producing a fundamentally-wrong transform array
 
 
 void rotate_x(float *ta_ptr, float angle_rad){
@@ -68,7 +77,13 @@ void rotate_x(float *ta_ptr, float angle_rad){
 }
 
 void rotate_y(float *ta_ptr, float angle_rad){
+    // Row 1
+    *ta_ptr = *ta_ptr * cosf(angle_rad) + *(ta_ptr+2) * sinf(angle_rad);
+    // Row 2
 
+    // Row 3
+
+    // Row 4
 }
 
 void rotate_z(float *ta_ptr, float angle_rad){
