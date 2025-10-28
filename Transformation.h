@@ -35,6 +35,24 @@ void rotate_z(float *ta_ptr, float angle_rad);
 void translate(float *ta_ptr, float t_x, float t_y, float t_z);
 
 /*
+ * change_perspective: transforms model into perspective projection with distance from view plane.
+ */
+void change_perspective(float *ta_ptr,float vp_distance);
+
+/*
+ * change_view: transforms model so to fit a viewing model so that is normal to z vertex.
+ * origin is the vector from the world coordinate origin to the view point.
+ * rv_angle is the angle between the z axis and the origin vector.
+ * lv_angle is the angle between the x axis and the horizontal component (relative to world central coordinate) of origin vector.
+ */
+void change_view(float *ta_ptr,float lv_angle, float rv_angle, float origin);
+
+/*
+ * Normalise the model to fit Normalised device coordinates.
+ */
+void normalise(triangle *polygon, int p_size);
+
+/*
  * transform: applies combined transformation to polygons.
  */
 void transform(float *ta_ptr, triangle *polygon, int p_size);

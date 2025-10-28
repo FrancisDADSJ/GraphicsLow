@@ -45,20 +45,22 @@ triangle *prism_ptr = &prism[0];
 
 int prism_size = sizeof(prism)/(sizeof(prism[0]));
 
-scale(ta_ptr, 5.0f, 3.0f, 4.0f);
-rotate_x(ta_ptr,0.5f);
-rotate_y(ta_ptr,0.2f);
-rotate_z(ta_ptr,0.1f);
-translate(ta_ptr,2.0 ,2.0 ,2.0);
-
+scale(ta_ptr, 1.0f, 1.0f, 1.0f);
+rotate_x(ta_ptr, 5.0f);
+rotate_y(ta_ptr, .0f);
+rotate_z(ta_ptr, 0.0f);
+translate(ta_ptr, 0.0f, 0.0f, 0.0f);
+change_perspective(ta_ptr, 0.25f);
+change_view(ta_ptr,0.3f ,0.2f ,10.0f);
 transform(ta_ptr, prism_ptr, prism_size);
+normalise(prism_ptr,prism_size);
 
 for (int i = 0; i < (sizeof(prism)/sizeof(prism[0])); i++){
 
     for(int j = 0;j < 3;j++){
         printf("%f %f %f %f\n", prism[i].vertices[j][0], prism[i].vertices[j][1], prism[i].vertices[j][2], prism[i].vertices[j][3]);
     }
-    printf("\n\n");
+    printf("\n");
 }
 
 return 0;
